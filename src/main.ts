@@ -4,6 +4,8 @@ import App from './App.vue'
 import Home from './components/Home.vue'
 import ContactForm from './components/ContactForm.vue'
 import NotFound from './components/NotFound.vue'
+// Merged: Added CSS import from second version
+import './styles/index.css'
 
 const routes = [
   { path: '/', component: Home },

@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     extend: {
+      // Custom color palette with primary blue and extended gray scale
       colors: {
         'primary': {
           50: '#eff6ff',

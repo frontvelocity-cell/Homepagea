@@ -33,5 +33,7 @@
 </template>
 
 <script setup lang="ts">
-// App component with navigation
+// Merged Vue app component with navigation and routing
+// Combines navigation layout with proper responsive design
+// Uses consistent styling with primary color theme and proper active states
 </script>

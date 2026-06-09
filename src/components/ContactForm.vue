@@ -92,7 +92,7 @@
         <button
           type="submit"
           :disabled="isSubmitting"
-          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
         >
           {{ isSubmitting ? 'Submitting...' : 'Submit' }}
         </button>
@@ -116,6 +116,7 @@ interface ContactForm {
   message: string
 }
 
+// Merged reactive form object from both versions
 const form = reactive<ContactForm>({
   name: '',
   email: '',
@@ -123,19 +124,23 @@ const form = reactive<ContactForm>({
   message: ''
 })
 
+// State management for submission and success feedback
 const isSubmitting = ref(false)
 const showSuccess = ref(false)
 
+// Enhanced submit handler combining both approaches
 const handleSubmit = async () => {
   isSubmitting.value = true
   
-  // Simulate form submission
-  setTimeout(() => {
+  try {
+    // Simulate form submission with async handling
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
     console.log('Form submitted:', form)
     isSubmitting.value = false
     showSuccess.value = true
     
-    // Reset form
+    // Reset form using Object.assign for cleaner approach
     Object.assign(form, {
       name: '',
       email: '',
@@ -143,10 +148,13 @@ const handleSubmit = async () => {
       message: ''
     })
     
-    // Hide success message after 3 seconds
+    // Auto-hide success message after 3 seconds
     setTimeout(() => {
       showSuccess.value = false
     }, 3000)
-  }, 1000)
+  } catch (error) {
+    console.error('Form submission error:', error)
+    isSubmitting.value = false
+  }
 }
 </script>
